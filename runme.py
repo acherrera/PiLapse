@@ -10,7 +10,7 @@ import os
 
 # Constants
 trigger_interval=5
-save_location = "/media/usb"
+save_location = "~/timelapse_photos"
 
 # Mount flash drive for backing up
 os.system("sudo mkdir /media/usb")
