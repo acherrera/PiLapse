@@ -14,12 +14,20 @@ import picamera
 import sys
 import time
 import os
+import shutil
 
 camera = picamera.PiCamera()
+
+# Inputs
 delay_time = sys.argv[1] # delay time argument
+backup_location = sys.argv[2] # Where to save data
+
+# Constants
+capture_location = "captures"
+last_backup_time = time.time()
+back_up_interval=17  # backup time in seconds
 
 # Create workspace if not made, move into space
-capture_location = "captures"
 if not os.path.exists(capture_location):
     os.mkdir(capture_location)
 
@@ -30,7 +38,7 @@ folder_name = 0
 new_file = True
 
 while new_file:
-    folder_name_string = str(folder_name)
+    folder_name_string = backup_location + "/" + str(folder_name)
     if not os.path.exists(folder_name_string):
         os.mkdir(folder_name_string)
         os.chdir(folder_name_string)
@@ -39,10 +47,15 @@ while new_file:
         folder_name += 1
 
 # Just run the crap out of this until Pi shuts down
-name = 0
+#TODO start timer - back up to flash drive every hour
+
+current_dir = os.getcwd()
+
+name = 1
 while True:
-    camera.capture("{}.jpg".format(name))
-    print("{}.jpg captured".format(name))
+
+    camera.capture("{:05}.jpg".format(name))
+    print("{:05}.jpg captured".format(name))
     time.sleep(5)
     name += 1
 
