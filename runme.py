@@ -12,6 +12,7 @@ import os
 trigger_interval=3
 save_location = "/media/usb"
 
+
 # Mount flash drive for backing up
 os.system("sudo mkdir /media/usb")
 os.system("sudo mount -t vfat /dev/sda1 /media/usb -o uid=1000,gid=1000,utf8,dmask=027,fmask=137")

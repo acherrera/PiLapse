@@ -6,7 +6,7 @@
 #           2018.07.18 - Initial version
 
 
-ffmpeg -r 15 -start_number 0001.jpg -i %d.jpg -s 1280x720 -vcodec libx264 $1
+ffmpeg -r 30 -start_number 00001 -i %05d.jpg -s 1280x720 -vcodec libx264 $1
 
 
 # -r: FPS
