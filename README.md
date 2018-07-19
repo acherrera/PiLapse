@@ -7,10 +7,9 @@ save them to an external drive but there are a couple caveats. Because this
 project is just beginning and is kind of my free time project,getting it to
 work for you might require a bit of programming
 
-    * External drive must be located at /dev/sda1. 
-    * External drive must be FAT or exFAT. See runme to choose which file to
-      use
-    * Timelapse creation script must be run from the folder containing the
+* External drive must be located at /dev/sda1. 
+* External drive must be FAT or exFAT. See runme to choose which file to use
+* Timelapse creation script must be run from the folder containing the
       images. It's a dumb program for now
 
 The install scripts just install libraries and packages that I did not have or
