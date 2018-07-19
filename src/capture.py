@@ -15,6 +15,7 @@ import sys
 import time
 import os
 import shutil
+import logging
 
 camera = picamera.PiCamera()
 
@@ -29,27 +30,38 @@ back_up_interval=17  # backup time in seconds
 
 # Create new folder with unique name for data
 folder_name = 0
-new_file = True
 
-while new_file:
-    folder_name_string = backup_location + "/" + str(folder_name)
-    if not os.path.exists(folder_name_string):
-        os.mkdir(folder_name_string)
-        os.chdir(folder_name_string)
-        new_file = False
-    else:
-        folder_name += 1
 
-# Just run the crap out of this until Pi shuts down
-#TODO start timer - back up to flash drive every hour
+def CreateUniqueFile(start_location, start_number=0):
+    """
+    This will create a unique file at the backup location
+    param start_location: locaton to put files
+    param start_number: number to start file naming
+    """
+    new_file = True
+    while new_file:
+        folder_name = start_location + "/" + str(start_number)
+        if not os.path.exists(folder_name):
+            os.mkdir(folder_name)
+            new_file = False
+        else:
+            start_number += 1
 
-current_dir = os.getcwd()
+        return folder_name
 
-name = 1
-while True:
 
-    camera.capture("{:05}.jpg".format(name))
-    print("{:05}.jpg captured".format(name))
-    time.sleep(int(delay_time))
-    name += 1
+def ContinousCapture(interval):
+    """
+    Captures images every "x" seconds
+    """
+    name = 1
+    while True:
+        camera.capture("{:05}.jpg".format(name))
+        print("{:05}.jpg captured".format(name))
+        time.sleep(int(interval))
+        name += 1
 
+
+folder_name = CreateUniqueFile(backup_location)
+os.chdir(folder_name)
+ContinousCapture(delay_time)

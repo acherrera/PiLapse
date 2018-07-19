@@ -20,10 +20,10 @@ save_location = "/media/usb"
 os.system("sudo mkdir /media/usb")
 
 # This is for fat file system
-# os.system("sudo mount -t vfat /dev/sda1 /media/usb -o uid=1000,gid=1000,utf8,dmask=027,fmask=137")
+os.system("sudo mount -t vfat /dev/sda1 /media/usb -o uid=1000,gid=1000,utf8,dmask=027,fmask=137")
 
 # Use this if  exfat flash drive is used
-os.system("sudo mount /dev/sda1 /media/usb")
+# os.system("sudo mount /dev/sda1 /media/usb")
 
 # Main program that is run. Captures every 
 file_location = __file__.split("/")[0:-1]
