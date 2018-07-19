@@ -1,5 +1,5 @@
-# PiLapse - the program for making time lapse videos with your Raspberry Pi and
-a Pi camera!
+# PiLapse!
+The program for making time lapse videos with your Raspberry Pi and a Pi camera!
 
 
 # How to use
@@ -30,8 +30,8 @@ me know and I can add it.
 * Make better documentation
 * runme.py should just call the main program. Could pretty easily combine the
   two into one file. This might make everything a little easier to maintain
-* ~~Timelapse creation script should take a location as an argument and create
-  the timelapse from the images at that location.~~ **May be working, needs
+* ~~Timelapse creation script should take a location as an argument and create~~
+  ~~the timelapse from the images at that location.~~ **May be working, needs
   testing**
 
 
