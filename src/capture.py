@@ -17,7 +17,12 @@ import os
 import shutil
 import logging
 
+
+# Basic Setup
+log_name = "image_log.log"
+os.remove(log_name)
 camera = picamera.PiCamera()
+logging.basicConfig(filename=log_name, level=logging.INFO)
 
 # Inputs
 delay_time = sys.argv[1] # delay time argument
@@ -57,7 +62,7 @@ def ContinousCapture(interval):
     name = 1
     while True:
         camera.capture("{:05}.jpg".format(name))
-        print("{:05}.jpg captured".format(name))
+        logging.info("{:05}.jpg captured".format(name))
         time.sleep(int(interval))
         name += 1
 
