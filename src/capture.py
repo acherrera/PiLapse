@@ -27,12 +27,6 @@ capture_location = "captures"
 last_backup_time = time.time()
 back_up_interval=17  # backup time in seconds
 
-# Create workspace if not made, move into space
-if not os.path.exists(capture_location):
-    os.mkdir(capture_location)
-
-os.chdir(capture_location)
-
 # Create new folder with unique name for data
 folder_name = 0
 new_file = True
@@ -56,6 +50,6 @@ while True:
 
     camera.capture("{:05}.jpg".format(name))
     print("{:05}.jpg captured".format(name))
-    time.sleep(5)
+    time.sleep(int(delay_time))
     name += 1
 

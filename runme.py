@@ -9,7 +9,7 @@
 import os
 
 # Constants
-trigger_interval=5
+trigger_interval=3
 save_location = "/media/usb"
 
 # Mount flash drive for backing up
