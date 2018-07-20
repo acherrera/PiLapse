@@ -20,9 +20,16 @@ import logging
 
 # Basic Setup
 log_name = "image_log.log"
-os.remove(log_name)
+
+# Create logging file if needed
+try:
+    os.remove(log_name)
+    logging.basicConfig(filename=log_name, level=logging.INFO)
+except FileNotFoundError:
+    logging.basicConfig(filename=log_name, level=logging.INFO)
+    logging.error("{} not removed - does not exist".format(log_name))
+
 camera = picamera.PiCamera()
-logging.basicConfig(filename=log_name, level=logging.INFO)
 
 # Inputs
 delay_time = sys.argv[1] # delay time argument
@@ -34,8 +41,6 @@ last_backup_time = time.time()
 back_up_interval=17  # backup time in seconds
 
 # Create new folder with unique name for data
-folder_name = 0
-
 
 def CreateUniqueFile(start_location, start_number=0):
     """
@@ -48,11 +53,12 @@ def CreateUniqueFile(start_location, start_number=0):
         folder_name = start_location + "/" + str(start_number)
         if not os.path.exists(folder_name):
             os.mkdir(folder_name)
+            logging.info("Created unique file {}".format(folder_name))
             new_file = False
         else:
             start_number += 1
 
-        return folder_name
+    return folder_name
 
 
 def ContinousCapture(interval):

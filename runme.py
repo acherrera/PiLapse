@@ -12,7 +12,7 @@
 import os
 
 # Constants
-trigger_interval=5
+trigger_interval=2
 save_location = "/media/usb"
 
 

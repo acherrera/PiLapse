@@ -7,4 +7,4 @@
 
 # Install dependancies
 sudo apt-get install python3-pip
-pip3 install picamera 
+sudo pip3 install picamera 
