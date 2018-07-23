@@ -10,11 +10,20 @@
 
 
 import os
+import time
 
 # Constants
 trigger_interval=2
 save_location = "/media/usb"
+time_to_sleep = 1 # minutes to wait
+time_to_run = 600 # minutes to run program
 
+# Convert minutes to seconds
+time_to_sleep = time_to_sleep*60
+time.sleep(time_to_sleep)
+
+# Send shutdown command 
+os.system("shutdown -h {}".format(time_to_run))
 
 # Mount flash drive for backing up
 os.system("sudo mkdir /media/usb")
