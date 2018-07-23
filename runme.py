@@ -6,16 +6,16 @@
 #               2018.07.18 - Initial version
 #               2018.07.18 - Made python script because file listing is hard
 #               2018.07.19 - Updated for exfat systems
-
+#               2018.07.23 - Added delay time
 
 
 import os
 import time
 
 # Constants
-trigger_interval=2
+trigger_interval=5
 save_location = "/media/usb"
-time_to_sleep = 1 # minutes to wait
+time_to_sleep = 360 # minutes to wait
 time_to_run = 600 # minutes to run program
 
 # Convert minutes to seconds
