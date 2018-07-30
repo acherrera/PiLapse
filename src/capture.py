@@ -8,37 +8,19 @@ Notes: Input should be number of seconds between photos
 Revisions:
             2018.07.17 - Initial Version
             2018.07.18 - folder creation method
+            2018.07.18 - Restructured program for def / main sections
+
 """
 
 import picamera
 import sys
-import time
 import os
 import shutil
 import logging
+from time import sleep
 
 
-# Basic Setup
-log_name = "image_log.log"
-
-# Create logging file if needed
-try:
-    os.remove(log_name)
-    logging.basicConfig(filename=log_name, level=logging.INFO)
-except FileNotFoundError:
-    logging.basicConfig(filename=log_name, level=logging.INFO)
-    logging.error("{} not removed - does not exist".format(log_name))
-
-camera = picamera.PiCamera()
-
-# Inputs
-delay_time = sys.argv[1] # delay time argument
-backup_location = sys.argv[2] # Where to save data
-
-# Constants
-capture_location = "captures"
-last_backup_time = time.time()
-back_up_interval=17  # backup time in seconds
+############## Function Definitions ###################
 
 # Create new folder with unique name for data
 
@@ -65,14 +47,43 @@ def ContinousCapture(interval):
     """
     Captures images every "x" seconds
     """
-    name = 1
-    while True:
-        camera.capture("{:05}.jpg".format(name))
-        logging.info("{:05}.jpg captured".format(name))
-        time.sleep(int(interval))
-        name += 1
+
+    camera = picamera.PiCamera()
+    camera.resolution = (3280, 2464)
+
+    for filename in camera.capture_continuous('img{counter:04d}.jpg'):
+        logging.info("Caputred {}".format(filename))
+        sleep(int(interval))
 
 
-folder_name = CreateUniqueFile(backup_location)
-os.chdir(folder_name)
-ContinousCapture(delay_time)
+################## Main Loop #########################
+
+if __name__=="__main__":
+
+    # Basic Setup
+    log_name = "image_log.log"
+
+    # Create logging file if needed
+    try:
+        os.remove(log_name)
+        logging.basicConfig(filename=log_name, level=logging.INFO)
+    except FileNotFoundError:
+        logging.basicConfig(filename=log_name, level=logging.INFO)
+        logging.error("{} not removed - does not exist".format(log_name))
+
+
+    # Inputs
+    delay_time = sys.argv[1] # delay time argument
+    backup_location = sys.argv[2] # Where to save data
+
+    # Constants
+    capture_location = "captures"
+
+    # Create unique file and get filename
+    folder_name = CreateUniqueFile(backup_location)
+
+    # Go to directory
+    os.chdir(folder_name)
+
+    # Caputure data continuously
+    ContinousCapture(delay_time)
