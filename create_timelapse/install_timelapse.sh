@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-sudo apt-get install ffmeg
+sudo apt-get install ffmpeg
