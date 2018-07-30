@@ -18,7 +18,7 @@ save_location = "/media/usb"
 
 # Delay setup 
 time_to_run = 600 # minutes to run program
-time_to_sleep = 600 # minutes to wait
+time_to_sleep = 0  # minutes to wait
 time_to_sleep = time_to_sleep*60
 time.sleep(time_to_sleep)
 

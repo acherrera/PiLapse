@@ -51,7 +51,7 @@ def ContinousCapture(interval):
     camera = picamera.PiCamera()
     camera.resolution = (3280, 2464)
 
-    for filename in camera.capture_continuous('img{counter:04d}.jpg'):
+    for filename in camera.capture_continuous('{counter:05d}.jpg'):
         logging.info("Caputred {}".format(filename))
         sleep(int(interval))
 
