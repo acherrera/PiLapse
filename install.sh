@@ -10,9 +10,9 @@ sudo apt-get install exiftool imagemagick -y
 
 
 # Download the files and make executable
-wget ozzmaker.com/downloads/berryIMU.py
-wget ozzmaker.com/downloads/LSM9DS0.py
-wget ozzmaker.com/downloads/takephoto.sh
+# wget ozzmaker.com/downloads/berryIMU.py
+# wget ozzmaker.com/downloads/LSM9DS0.py
+# wget ozzmaker.com/downloads/takephoto.sh
 
 # Install python requirement
 sudo apt-get install python-smbus
