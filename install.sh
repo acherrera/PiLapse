@@ -4,9 +4,11 @@
 # Revisions:
 #       2018.07.30 - Initial version
 #       2018.08.01 - Updated with python smbus
+#       2018.08.03 - Added fswebcam
 
 
 sudo apt-get install exiftool imagemagick -y
+sudo apt-get install fswebcam
 
 
 # Download the files and make executable

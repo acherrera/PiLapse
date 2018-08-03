@@ -59,9 +59,9 @@ while true; do
 
     #Add GeoTags and attitude to bottom of image and save with new file name
     if [ $FIX == "YES" ];then
-        cmd="convert /home/pi/image.jpg -gravity SouthEast -stroke '#000C' -pointsize 24 -strokewidth 2 -annotate 0 'Lat: $latitude Lon: $longitude Alt: $altitude Speed: $speed Pitch: $pitch Roll: $roll Direction: $heading' -stroke none -fill white -annotate 0 'Lat: $latitude Lon: $longitude Alt: $altitude Speed: $speed Pitch: $pitch Roll: $roll Direction: $heading' $FILE"
+        # cmd="convert /home/pi/image.jpg -gravity SouthEast -stroke '#000C' -pointsize 24 -strokewidth 2 -annotate 0 'Lat: $latitude Lon: $longitude Alt: $altitude Speed: $speed Pitch: $pitch Roll: $roll Direction: $heading' -stroke none -fill white -annotate 0 'Lat: $latitude Lon: $longitude Alt: $altitude Speed: $speed Pitch: $pitch Roll: $roll Direction: $heading' $FILE"
         #If you dont want to annotate the photos with the metadata, comment out the above line and use the line below.
-        #cmd="convert /home/pi/image.jpg   $FILE"
+        cmd="convert /home/pi/image.jpg   $FILE"
 
         eval $cmd
 
