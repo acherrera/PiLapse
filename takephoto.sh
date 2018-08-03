@@ -1,12 +1,13 @@
 #!/bin/bash
 #Setup GPIO21 as input. GPIO21 will be used to detect if the GPS has a fix.
-# echo "21" > /sys/class/gpio/export
+echo "21" > /sys/class/gpio/export
 echo "in" > /sys/class/gpio/gpio21/direction
 
-# Time to wait in seconds
-IntervalTime=2 
+IntervalTime=5
 
 while true; do
+
+    echo "Starting"
     START_TIME=$SECONDS
 
     #Check to see if GPS has a FIX.  GPS fix pin will go high every 1 sec if there is a fix. 
@@ -15,9 +16,9 @@ while true; do
     while [ $FIX == "NO" ] && [ $(($SECONDS  - $START_TIME)) -lt 2 ]; do
         fixcheck=$(cat /sys/class/gpio/gpio21/value)      #GPIO21 is connected to the fix indication pin on BerryGPS-IMU
         if [ "$fixcheck" == "0" ]; then
-                FIX="NO"
-            else
-                FIX="YES"
+            FIX="NO"
+        else
+            FIX="YES"
         fi
     done
 
@@ -36,7 +37,8 @@ while true; do
     fi
 
     #Get angles and heading from the IMU
-    attitude=$(sudo python /home/pi/pilapse/berryIMU_files/berryIMU.py | tail -1)
+    attitude=$(sudo python /home/pi/pilapse/berryIMU_files/berryIMU.py | tail -n2 | head -n1)
+    echo "debug: $attitude"
     roll=$(echo $attitude | python -c 'import sys, json; print json.load(sys.stdin)["Roll"]')
     pitch=$(echo $attitude | python -c 'import sys, json; print json.load(sys.stdin)["Pitch"]')
     heading=$(echo $attitude | python -c 'import sys, json; print json.load(sys.stdin)["tiltCompensatedHeading"]')
@@ -48,8 +50,11 @@ while true; do
     #Remove old file
     sudo rm -f /home/pi/image.jpg
 
+
+    fswebcam -r 1280x720 --no-banner /home/pi/image.jpg
+
     #Take photo
-    sudo raspistill -o /home/pi/image.jpg  -ex auto -w 1280 -h 720 --nopreview  --rotation 180
+    # sudo raspistill -o /home/pi/image.jpg  -ex auto -w 1280 -h 720 --nopreview  --rotation 180
 
 
     #Add GeoTags and attitude to bottom of image and save with new file name

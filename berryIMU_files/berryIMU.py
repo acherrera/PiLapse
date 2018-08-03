@@ -162,7 +162,9 @@ kalmanY = 0.0
 
 a = datetime.datetime.now()
 
-while True:
+num=0
+end_limit = 10
+while num<end_limit:
 
 
     #Read the accelerometer,gyroscope and magnetometer values
@@ -187,7 +189,6 @@ while True:
     b = datetime.datetime.now() - a
     a = datetime.datetime.now()
     LP = b.microseconds/(1000000*1.0)
-    print "Loop Time %5.2f " % ( LP ),
 
 
     #Convert Gyro raw to degrees per second
@@ -283,26 +284,17 @@ while True:
     ############################ END ##################################
 
 
-    if 1:			#Change to '0' to stop showing the angles from the accelerometer
-        print ("# ACCX Angle %5.2f ACCY Angle %5.2f #  " % (AccXangle, AccYangle)),
+    print ("{\"Roll\":\"%.2f\",\"Pitch\":\"%.2f\"," % (CFangleX,CFangleY)),
 
-    if 1:			#Change to '0' to stop  showing the angles from the gyro
-        print ("\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (gyroXangle,gyroYangle,gyroZangle)),
+    print ("\"tiltCompensatedHeading\":\"%.2f\"}" %
+                (tiltCompensatedHeading)),
 
-    if 1:			#Change to '0' to stop  showing the angles from the complementary filter
-        print ("\t# CFangleX Angle %5.2f   CFangleY Angle %5.2f #" % (CFangleX,CFangleY)),
-        
-    if 1:			#Change to '0' to stop  showing the heading
-        print ("\t# HEADING %5.2f  tiltCompensatedHeading %5.2f #" % (heading,tiltCompensatedHeading)),
-        
-    if 1:			#Change to '0' to stop  showing the angles from the Kalman filter
-        print ("# kalmanX %5.2f   kalmanY %5.2f #" % (kalmanX,kalmanY)),
+    print ("")
 
-    #print a new line
-    print ""  
 
 
     #slow program down a bit, makes the output more readable
     time.sleep(0.03)
+    num += 1
 
 
