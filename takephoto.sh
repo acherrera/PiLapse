@@ -24,6 +24,7 @@ while true; do
 
     #If there is a fix, grab all the relevant GPS data
     if [ $FIX == "YES" ]; then
+        echo "GPS fix acquired"
         tpv=$(gpspipe -w -n 10 | grep -m 1 TPV)
         latitude=$(echo $tpv | python -c 'import sys, json; print json.load(sys.stdin)["lat"]')
         longitude=$(echo $tpv | python -c 'import sys, json; print json.load(sys.stdin)["lon"]')
